@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maxime Marcinkiewicz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Maxime Marcinkiewicz — certified Microsoft Power Apps developer (AB-410) based in Warsaw. Business apps, automation and AI integration with Claude.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column; hero built around a Power Fx formula bar, then plain sections separated by labels written like app control names. */
+:root{
+  --bg:#F5F4F8; --surface:#FFFFFF; --fg:#1C1A24; --muted:#5E5A6B; --line:#DEDBE6;
+  --accent:#7A2D6C; --accent-soft:#F1E4EE; --code-bg:#1C1A24; --code-fg:#ECE9F2; --code-key:#E7A6D8; --code-str:#A9D8B8; --code-dim:#8C879A;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141219; --surface:#1D1A24; --fg:#ECE9F2; --muted:#A39EB2; --line:#2F2B39;
+  --accent:#E09BD1; --accent-soft:#2E1F2C; --code-bg:#0D0B11; --code-fg:#ECE9F2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141219; --surface:#1D1A24; --fg:#ECE9F2; --muted:#A39EB2; --line:#2F2B39;
+  --accent:#E09BD1; --accent-soft:#2E1F2C; --code-bg:#0D0B11; --code-fg:#ECE9F2; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:860px;margin:0 auto}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:24px}
+.mark{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:var(--fg)}
+.mark span{color:var(--accent)}
+nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500}
+nav ul a:hover{color:var(--fg)}
+
+.hero{padding-block:56px 72px;display:grid;gap:28px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,76px);line-height:1;letter-spacing:-.035em;margin:0;text-wrap:balance}
+.lede{font-size:clamp(18px,2.4vw,21px);color:var(--muted);max-width:38em;margin:0}
+.lede strong{color:var(--fg);font-weight:600}
+
+.fx{background:var(--code-bg);color:var(--code-fg);border-radius:10px;font-family:var(--mono);font-size:14px;overflow:hidden}
+.fx-bar{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid #ffffff1a;color:var(--code-dim);font-size:12px}
+.fx-bar b{font-style:italic;font-family:Georgia,serif;font-size:15px;color:var(--code-key);font-weight:600}
+.fx pre{margin:0;padding:16px 18px;overflow-x:auto;line-height:1.7}
+.k{color:var(--code-key)} .s{color:var(--code-str)} .c{color:var(--code-dim)}
+.cursor{display:inline-block;width:8px;height:1.1em;background:var(--code-key);vertical-align:text-bottom;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font:600 16px var(--body);text-decoration:none;border:1.5px solid var(--accent);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+
+section{padding-block:56px;border-top:1px solid var(--line)}
+.label{font-family:var(--mono);font-size:13px;color:var(--muted);margin:0 0 10px}
+.label::before{content:"";display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:2px;margin-right:10px;vertical-align:middle}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,40px);line-height:1.1;letter-spacing:-.025em;margin:0 0 24px;text-wrap:balance}
+p{margin:0 0 16px;max-width:65ch}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px}
+.stat{border-top:2px solid var(--accent);padding-top:12px}
+.stat b{display:block;font-family:var(--display);font-weight:800;font-size:44px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat span{font-size:15px;color:var(--muted)}
+
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 40px}
+.svc h3{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.01em;margin:0 0 6px}
+.svc p{color:var(--muted);margin:0;font-size:16px}
+.svc code{font-family:var(--mono);font-size:12px;color:var(--accent);display:block;margin-bottom:8px}
+
+.cert{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px}
+.badge{width:116px;height:116px;display:grid;place-items:center;text-align:center;border-radius:50%;background:var(--accent-soft);border:2px solid var(--accent);color:var(--accent);font-family:var(--display);font-weight:800;line-height:1.05}
+.badge small{display:block;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.badge b{font-size:28px}
+.cert h3{font-family:var(--display);font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+.cert p{margin:0;color:var(--muted);font-size:16px}
+
+.langs{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.langs li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.langs .name{font-weight:600;font-size:18px}
+.langs .name em{font-style:normal;font-weight:400;color:var(--muted);font-size:15px;margin-left:8px}
+.meter{display:flex;gap:4px}
+.meter i{width:22px;height:8px;border-radius:2px;background:var(--line)}
+.meter i.on{background:var(--accent)}
+.lvl{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+
+.place{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:8px}
+.place div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.place small{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.place b{display:block;font-family:var(--display);font-size:24px;margin-top:4px}
+
+.contact{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(24px,5vw,44px)}
+.email{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0 24px}
+.email-text{font-family:var(--mono);font-size:clamp(15px,3.2vw,22px);font-weight:500;background:var(--accent-soft);color:var(--fg);padding:12px 16px;border-radius:10px;user-select:all;overflow-wrap:anywhere;min-width:0}
+.copied{font-size:14px;color:var(--accent);min-height:1.4em}
+.contact ol{padding-left:20px;margin:0 0 8px;color:var(--muted)}
+.contact ol li{margin-bottom:6px}
+
+ .clients{list-style:none;margin:28px 0 36px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.clients li{display:grid;place-items:center;text-align:center;min-height:88px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.tl{list-style:none;margin:0 0 36px;padding:0}
+.tl li{display:grid;grid-template-columns:130px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.tl .when{font-family:var(--mono);font-size:13px;color:var(--accent);padding-top:5px;font-variant-numeric:tabular-nums}
+.tl h3{font-family:var(--display);font-weight:700;font-size:20px;margin:0;letter-spacing:-.01em}
+.tl .where{font-size:14px;color:var(--muted);margin-bottom:8px}
+.tl p{margin:0;font-size:16px;color:var(--muted)}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.skills div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.skills small{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.skills p{margin:6px 0 0;font-size:15px}
+@media (max-width:640px){.tl li{grid-template-columns:1fr;gap:4px}.skills{grid-template-columns:1fr}}
+footer{padding-block:40px 56px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line)}
+
+@media (max-width:640px){
+  .services,.place{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .cert{grid-template-columns:1fr;justify-items:start}
+  nav ul{gap:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="mark" href="#top">Maxime<span>.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Customers</a></li>
+      <li><a href="#languages">Languages</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="eyebrow">Power Apps developer · Warsaw</div>
+    <h1>Maxime Marcinkiewicz</h1>
+    <p class="lede">I build <strong>business apps on Microsoft Power Platform</strong> that replace spreadsheets, paper forms and email chains. Certified Intelligent Applications Builder (AB-410), now connecting Power Apps with <strong>Claude</strong> for AI-assisted workflows.</p>
+
+    <div class="fx" aria-label="Example Power Fx formula">
+      <div class="fx-bar"><b>fx</b> btnStartProject.OnSelect</div>
+<pre><span class="k">Patch</span>(Projects, <span class="k">Defaults</span>(Projects), {
+    Client:    <span class="s">"You"</span>,
+    Developer: <span class="s">"Maxime Marcinkiewicz"</span>,
+    Status:    <span class="s">"Let's talk"</span>
+}); <span class="k">Navigate</span>(scrContact)<span class="cursor" aria-hidden="true"></span></pre>
+    </div>
+
+    <div class="actions">
+      <a class="btn primary" href="#contact">Start a project</a>
+      <a class="btn ghost" href="#services">See what I build</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <p class="label">About</p>
+    <h2>Ten years in IT, five of them in Power Apps</h2>
+    <p>I started in IT ten years ago and have spent the last five years as a Microsoft Power Apps developer. I work with teams that need a tool fitted to the way they actually work: an approval process, an inventory tracker, a field-service app, a customer portal.</p>
+    <p>As a consultant I have delivered for clients in pharmaceuticals, banking, logistics, automotive and energy, in the United States, Germany, Austria, Italy, Bulgaria, France and Poland. I also do the business analysis, so the app solves the right problem. I take a project from the first conversation to a working app in your Microsoft 365 tenant: data model in Dataverse or SharePoint, the app itself, automations in Power Automate, and handover so your team can run it. Today I also integrate Claude into these solutions, so apps can read documents, draft replies and summarise records.</p>
+    <div class="stats">
+      <div class="stat"><b>10</b><span>years in IT</span></div>
+      <div class="stat"><b>5</b><span>years building Power Apps</span></div>
+      <div class="stat"><b>7</b><span>client countries, from the US to Bulgaria</span></div>
+    </div>
+  </section>
+
+  <section id="services">
+    <p class="label">Services</p>
+    <h2>What I can build for you</h2>
+    <div class="services">
+      <div class="svc"><code>Canvas · Model-driven</code><h3>Power Apps</h3><p>Custom business apps for desktop, tablet and phone, designed around your process and your users.</p></div>
+      <div class="svc"><code>Power BI</code><h3>Dashboards and reporting</h3><p>Power BI reports with clear charts built on the same data as your apps, so managers see what is happening.</p></div>
+      <div class="svc"><code>Power Automate</code><h3>Workflow automation</h3><p>Approvals, notifications, document generation and data sync between Outlook, Teams, SharePoint and other systems.</p></div>
+      <div class="svc"><code>Dataverse · SharePoint</code><h3>Data modelling</h3><p>Clean tables, relationships, business rules and security roles, so the app stays reliable as it grows.</p></div>
+      <div class="svc"><code>Copilot · Claude</code><h3>AI integration</h3><p>Copilot features and Claude connected to your apps: document reading, smart summaries and drafting inside your workflow.</p></div>
+      <div class="svc"><code>SharePoint · Nintex</code><h3>SharePoint migration</h3><p>Moving old SharePoint On-Prem solutions and Nintex workflows to SharePoint Online and Power Platform.</p></div>
+      <div class="svc"><code>Audit · Rebuild</code><h3>Fixing existing apps</h3><p>Slow galleries, delegation warnings, broken flows. I review what you have and make it fast and maintainable.</p></div>
+      <div class="svc"><code>Handover</code><h3>Training and support</h3><p>Documentation and sessions for your makers and admins, in French, Polish, English or Spanish.</p></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <p class="label">Customers</p>
+    <h2>Companies I have built for</h2>
+    <p>Power Platform, SharePoint and .NET projects delivered for international companies in energy, pharmaceuticals, banking, industry and IT services.</p>
+    <ul class="clients">
+      <li>TotalEnergies</li>
+      <li>Pfizer</li>
+      <li>Sandoz</li>
+      <li>Íslandsbanki</li>
+      <li>VTS</li>
+      <li>Voss</li>
+      <li>NATEK</li>
+      <li>Bluesoft</li>
+    </ul>
+    <div class="skills">
+      <div><small>Expert</small><p>Power Apps · Power Automate · SharePoint Online</p></div>
+      <div><small>Advanced</small><p>SharePoint On-Prem · PowerShell · Nintex</p></div>
+      <div><small>Also</small><p>Copilot Studio · Power BI · Azure · C#/.NET · SQL Server · JavaScript · Claude</p></div>
+      <div><small>Education</small><p>Master’s degree in Information Technology, EPF, Sceaux (France)</p></div>
+    </div>
+  </section>
+
+  <section id="certification">
+    <p class="label">Certification</p>
+    <h2>Microsoft certified</h2>
+    <div class="cert">
+      <div class="badge"><div><b>AB-410</b><small>Microsoft</small></div></div>
+      <div>
+        <h3>Intelligent Applications Builder Associate</h3>
+        <p>Earned by passing exam AB-410, Building Intelligent Applications. It covers designing and building AI-powered business apps on Power Platform with Power Apps, Dataverse, Power Automate, Copilot and Copilot Studio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <p class="label">Languages</p>
+    <h2>Born in Paris, based in Warsaw</h2>
+    <p>French and Polish, with both nationalities. I work with clients across Europe and beyond, remotely or on site in Warsaw.</p>
+    <div class="place">
+      <div><small>Born</small><b>Paris, France</b></div>
+      <div><small>Lives and works</small><b>Warsaw, Poland</b></div>
+    </div>
+    <div style="height:20px"></div>
+    <ul class="langs">
+      <li><span class="name">French <em>Français</em></span><div><div class="meter" aria-label="Native, bilingual"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="lvl">Native, bilingual</div></div></li>
+      <li><span class="name">Polish <em>Polski</em></span><div><div class="meter" aria-label="Native, bilingual"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="lvl">Native, bilingual</div></div></li>
+      <li><span class="name">English <em>English</em></span><div><div class="meter" aria-label="Professional"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><div class="lvl">Professional</div></div></li>
+      <li><span class="name">Spanish <em>Español</em></span><div><div class="meter" aria-label="Fluent"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><div class="lvl">Fluent</div></div></li>
+      <li><span class="name">Ukrainian <em>Українська</em></span><div><div class="meter" aria-label="Basic"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><div class="lvl">Basic</div></div></li>
+      <li><span class="name">Russian <em>Русский</em></span><div><div class="meter" aria-label="Basic"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><div class="lvl">Basic</div></div></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <p class="label">Contact</p>
+      <h2>Have a project in mind?</h2>
+      <p>Send me an email. I reply within one business day.</p>
+      <div class="email">
+        <span class="email-text" id="email">maxime.marcinkiewicz@hotmail.com</span>
+        <button class="btn primary" id="copyBtn" type="button">Copy email</button>
+        <a class="btn ghost" href="mailto:maxime.marcinkiewicz@hotmail.com?subject=Power%20Apps%20project">Open in mail app</a>
+      </div>
+      <div class="copied" id="copied" role="status" aria-live="polite"></div>
+      <p style="margin-top:8px"><strong>To get a quick estimate, tell me:</strong></p>
+      <ol>
+        <li>What process you want to improve, and who uses it today</li>
+        <li>Where your data lives (Excel, SharePoint, Dataverse, another system)</li>
+        <li>Your timeline and preferred language</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Maxime Marcinkiewicz</span>
+    <span>Power Apps developer · Warsaw, Poland</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn'), out=document.getElementById('copied'), el=document.getElementById('email');
+  var addr=el.textContent.trim();
+  function selectText(){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}
+  btn.addEventListener('click',function(){
+    var done=function(){out.textContent='Email address copied.';};
+    var fail=function(){selectText();out.textContent='Address selected. Press Ctrl+C (or ⌘+C) to copy.';};
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(addr).then(done,fail);}
+      else fail();
+    }catch(e){fail();}
+  });
+})();
+</script>
+</body>
+</html>
